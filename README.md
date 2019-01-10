@@ -46,9 +46,14 @@ This indicates that the game has finished.
 
 ## Command arguments
 **playerName**  
-The display name of the player
+The display name of the player. Allowed characters: [A-Za-z0-9_-], so:
+- letters and capital letters
+- digits
+- underscore
+- dash
 
-**tile**
+**tile**  
+The definition of a tile, consisting of 3 letters and one digit. See also Tile definition.
 
 **errorCode**  
 An integer value describing the error type. This must be a value described in the _error codes_ section. A value of 0 must be used when this function is not implemented.
@@ -56,11 +61,65 @@ An integer value describing the error type. This must be a value described in th
 **errorMessage**  
 A textual representation of the error, intended to be displayed to the user.
 
-## tile definition
+## Tile definition
+A tile is always represented by 3 letters and one digit (eg. PPY1). When rotated 0 degrees, tiles are numbered counterclockwise, starting at the 'horizontal' face. The rotation is also defined counterclockwise. The digit is either 0, 1 or 2, depending on the rotation.
 
+### examples
+- ![0 degrees](https://raw.githubusercontent.com/anneheijink/spectrangle-protocol/master/images/0deg.png) RGB0
 
+- ![120 degrees](https://raw.githubusercontent.com/anneheijink/spectrangle-protocol/master/images/120deg.png) RGB1
 
-## error codes
+- ![240 degrees](https://raw.githubusercontent.com/anneheijink/spectrangle-protocol/master/images/240deg.png) RGB2
+
+### used colors
+The following letters are user for the colors:
+- R: red
+- G: green
+- B: blue
+- Y: yellow
+- P: purple
+- W: white
+
+### tiles in the game
+In total, there are 36 tiles in the game. Each tile is listed below with their corresponding value.
+- RRR0 (6 points)
+- BBB0 (6 points)
+- GGG0 (6 points)
+- YYY0 (6 points)
+- PPP0 (6 points)
+- RRY0 (5 points)
+- RRP0 (5 points)
+- BBR0 (5 points)
+- BBP0 (5 points)
+- GGR0 (5 points)
+- GGB0 (5 points)
+- YYG0 (5 points)
+- YYB0 (5 points)
+- PPY0 (5 points)
+- PPG0 (5 points)
+- RRB0 (4 points)
+- RRG0 (4 points)
+- BBG0 (4 points)
+- BBY0 (4 points)
+- GGY0 (4 points)
+- GGP0 (4 points)
+- YYR0 (4 points)
+- YYP0 (4 points)
+- PPR0 (4 points)
+- PPB0 (4 points)
+- YBP0 (3 points)
+- RGY0 (3 points)
+- BGP0 (3 points)
+- GRB0 (3 points)
+- BRP0 (2 points)
+- YPR0 (2 points)
+- YPG0 (2 points)
+- GRP0 (1 point)
+- BYG0 (1 point)
+- RYB0 (1 point)
+- WWW0 (1 point)
+
+## Error codes
 - **0**: Generic / unknown error.
 - **1**: Unrecognized command.
 - **2**: Invalid arguments.

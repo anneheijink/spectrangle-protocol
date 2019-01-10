@@ -1,6 +1,6 @@
 1. &gt;  JOIN alice
-2. &lt;  LOBBY
-3. &lt;  LOBBY bob
+2. &lt;  LOBBY alice
+3. &lt;  LOBBY alice,bob
 4. &gt;  READY
 5. &lt;  START bob,alice
 6. &lt;  TILE alice RRP0,BRP0,WWW0,RYB0
@@ -14,3 +14,6 @@
 14 ...
 15. &lt; SCORE alice,50 bob,60
 16. &gt; EXIT
+
+# Explanation
+At first, Alice tries to join the lobby (1). Since she is the first player entering the lobby, the server answers with a LOBBY command, containing only Alice's name (2). After a while, Bob also joins the lobby. The server sends a new LOBBY command to both Alice and bob (3).
