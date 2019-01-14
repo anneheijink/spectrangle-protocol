@@ -1,8 +1,9 @@
 # spectrangle-protocol
 This is a protocol definition of the spectrangle game. Possible extensions are defined in the extensions directory. Examples on how to use the protocol can be found in the examples directory.
 
-Values between angle brackets (&lt; and &gt;) indicate a _required_ argument.  
-Values between square brackets ([ and ]) indicate an _optional_ argument.
+Values between angle brackets ( &lt; &gt; ) indicate a _required_ argument. (occurs exactly 1 time)  
+Values between square brackets ( [ ] ) indicate an _optional_ argument. (occurs 0 or 1 times)  
+An ellipsis (...) indicates the possible repetition of the (group of) arguments since the last whitespace.
 
 
 ## Client-to-server commands
@@ -12,15 +13,15 @@ The player indicates he wants to join a lobby.
 **READY**  
 The player indicates he is ready to start the game.
 
-**MOVE PLAY &lt;tile&gt; &lt;location&gt;**  
+**MOVE_PLAY &lt;tile&gt; &lt;location&gt;**  
 The player places a tile on the board.
 
-**MOVE SWAP &lt;tile&gt;**  
+**MOVE_SWAP &lt;tile&gt;**  
 The player swaps a tile from his inventory with a tile in the bag.
 This command is only valid when it's the players turn and the player is not able to make a valid move.
 
-**MOVE SKIP &lt;tile&gt;**  
-This command is only valid when it's the players turn and the player is not able to make a valid move.
+**MOVE_SKIP**  
+The player skips his turn. This command is only valid when it's the players turn and the player is not able to make a valid move.
 
 **EXIT**  
 The player indicates he leaves the lobby/game.
@@ -29,19 +30,21 @@ The player indicates he leaves the lobby/game.
 **ERROR &lt;errorCode&gt; &lt;errorMessage&gt;**  
 This is sent to the client when the client has sent an invalid command to the server.
 
-**LOBBY &lt;playerName&gt;**  
+**LOBBY \[playerName\] ...**  
 The server confirms the client has succesfully entered the lobby, and lists the other players that are in the lobby.
 Note this command can be sent every time a client enters or leaves the lobby.
 
-**START &lt;playerName&gt;**  
+**START &lt;playerName&gt; ...**  
 The game has started with the players listed. Players take turns in the order listed. Note a game should only be started when all players in the lobby have sent the READY command.
 
-**TILE &lt;playerName&gt;,&lt;tile\>,[oldTile]**  
-A tile has been given to a player. This also indicates it's the next players turn.
-When there are no tiles left or a player skipped his turn, this command will not have any arguments.
-When a player has swapped tiles, oldTile indicates the tile that has been removed from the players inventory.
+**UPDATE &lt;playerName&gt; \[tile\] [location]**   
+This indicates the player has finished his turn. When the player made a moved, this will be specified by the _tile_ and _location_ arguments. When the player skipped his turn or swapped a piece, _tile_ and _location_ will not be present.
 
-**SCORE &lt;playerName&gt;,&lt;points&gt;**  
+**TILE &lt;playerName&gt; &lt;tile\> [oldTile]**  
+A tile has been given to a player.
+When a player has swapped tiles, oldTile indicates the tile that has been removed from the players inventory. In case the player skipped his turn, this command will not be sent.
+
+**SCORE &lt;playerName&gt;,&lt;points&gt; &lt;playerName&gt;,&lt;points&gt; ...**  
 This indicates that the game has finished.
 
 ## Command arguments
@@ -60,6 +63,9 @@ An integer value describing the error type. This must be a value described in th
 
 **errorMessage**  
 A textual representation of the error, intended to be displayed to the user.
+
+**points**  
+An integer value greater than or equal to 0.
 
 ## Tile definition
 A tile is always represented by 3 letters and one digit (eg. PPY1). When rotated 0 degrees, tiles are numbered counterclockwise, starting at the 'horizontal' face. The rotation is also defined counterclockwise. The digit is either 0, 1 or 2, depending on the rotation.
