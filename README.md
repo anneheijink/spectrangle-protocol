@@ -58,6 +58,9 @@ The display name of the player. Allowed characters: [A-Za-z0-9_-], so:
 **tile**  
 The definition of a tile, consisting of 3 letters and one digit. See also Tile definition.
 
+**location**  
+An integer between 0 and 35. It can be calculated using the formula `index=row^2+rowIndex`, where row is the row number starting at 0, and rowIndex starting at 0 for the leftmost field.
+
 **errorCode**  
 An integer value describing the error type. This must be a value described in the _error codes_ section. A value of 0 must be used when this function is not implemented.
 
