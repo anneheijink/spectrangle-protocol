@@ -1,6 +1,6 @@
 1. &gt;  JOIN alice
 2. &lt;  LOBBY alice
-3. &lt;  LOBBY alice,bob
+3. &lt;  LOBBY alice bob
 4. &gt;  READY
 5. &lt;  START bob alice
 6. &lt;  TILE alice RRP0
