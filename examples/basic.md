@@ -2,7 +2,7 @@
 2. &lt;  LOBBY alice
 3. &lt;  LOBBY alice,bob
 4. &gt;  READY
-5. &lt;  START bob,alice
+5. &lt;  START bob alice
 6. &lt;  TILE alice RRP0
 7. &lt;  TILE alice BRP0
 8. &lt;  TILE alice WWW0
