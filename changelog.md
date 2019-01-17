@@ -1,3 +1,7 @@
+## 17-01-19 18:00
+- Slightly redefined the UPDATE and TILE commands
+- Updated the chat protocol to use Base64 encoding for the chat message.
+
 ### 16-01-19 14:15
 - Define extensions protocol
 - Define multilobby extension

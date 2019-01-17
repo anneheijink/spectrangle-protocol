@@ -8,7 +8,7 @@ An ellipsis (...) indicates the possible repetition of the (group of) arguments 
 
 ## Client-to-server commands
 **JOIN &lt;playerName&gt; \[lobbyName\]**  
-The player indicates he wants to join a lobby.
+The player indicates he wants to join a lobby. Servers that do not support the multilobby extension should ignore the _lobbyName_ argument.
 
 **READY**  
 The player indicates he is ready to start the game.
@@ -38,11 +38,12 @@ Note this command can be sent every time a client enters or leaves the lobby.
 The game has started with the players listed. Players take turns in the order listed. Note a game should only be started when all players in the lobby have sent the READY command.
 
 **UPDATE &lt;playerName&gt; \[tile\] [location]**   
-This indicates the player has finished his turn. When the player made a moved, this will be specified by the _tile_ and _location_ arguments. When the player skipped his turn or swapped a piece, _tile_ and _location_ will not be present.
+This indicates the player has finished his turn. When the player made a moved, this will be specified by the _tile_ and _location_ arguments. When the player skipped his turn, _tile_ and _location_ will not be present. When the player swapped a tile, only the _playerName_ and _tile_ arguments will be present. The _tile_ argument always indicates a tile that is to be removed from the player's inventory.
 
-**TILE &lt;playerName&gt; &lt;tile\> [oldTile]**  
+**TILE &lt;playerName&gt; &lt;tile\>**  
 A tile has been given to a player.
-When a player has swapped tiles, oldTile indicates the tile that has been removed from the players inventory. In case the player skipped his turn, this command will not be sent.
+In case the player skipped his turn, this command will not be sent.
+In case the player swapped a tile, this command will be sent in combination with an UPDATE command.
 
 **SCORE &lt;playerName&gt;,&lt;points&gt; &lt;playerName&gt;,&lt;points&gt; ...**  
 This indicates that the game has finished.
@@ -138,3 +139,4 @@ In total, there are 36 tiles in the game. Each tile is listed below with their c
 - **6**: Invalid move.
 - **7**: Not in a lobby.
 - **8**: Not in a game.
+- **9**: Unsupported extension

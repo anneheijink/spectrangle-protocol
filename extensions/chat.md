@@ -10,15 +10,15 @@ A new chat message has arrived. playerName indicates the player who sent the mes
 
 ## Command arguments
 - **chatMessage**  
-  The chat message. This is always the last argument in a command.
-  Allowed Characters: [A-Za-z0-9 \_.,-~], so:
-  - letters and capital letters
-  - digits
-  - whitespace
-  - underscore
-  - period
-  - comma
-  - hyphen
+  The chat message. This is a base64-encoded string that contains the chat message.
 
 - **playerName**  
   The player name, as described in the base protocol
+
+## Base64 in Java
+Base64 in Java can be used in the following manner:
+
+````Java
+System.out.println(Base64.getEncoder().encodeToString("Hello, world!😋".getBytes()));
+System.out.println(new String(Base64.getDecoder().decode("SGVsbG8sIHdvcmxkIfCfmIs=")));
+````
